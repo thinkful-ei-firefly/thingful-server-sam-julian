@@ -34,11 +34,11 @@ before('make knex instance', () => {
 
     const protectedEndpoints = [
         {
-            name: 'GET /api/things/:thing_id'
+            name: 'GET /api/things/:thing_id',
             path: '/api/things/1'
         },
         {
-            name: 'GET /api/things/:thing_id/reviews'
+            name: 'GET /api/things/:thing_id/reviews',
             path: '/api/thing/1/reviews'
         }
     ];
@@ -63,4 +63,3 @@ before('make knex instance', () => {
             });
     });
 });
-
