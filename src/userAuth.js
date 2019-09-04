@@ -23,6 +23,7 @@ function requireAuth(req, res, next) {
     .first()
     .then(user => {
       if (!user) {
+        console.log('user is '+user)
         return res.status(401).json({error: 'Unauthorized request'})
       }
       return bcrypt.compare(token_password, user.password)

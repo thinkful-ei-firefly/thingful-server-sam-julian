@@ -88,6 +88,14 @@ describe('Things Endpoints', function() {
 
   describe(`GET /api/things/:thing_id`, () => {
     context(`Given no things`, () => {
+      beforeEach('seed users table', () => {
+        helpers.seedThingsTables(
+          db,
+          testUsers,
+          testThings,
+          testReviews,
+        )
+      })
       it(`responds with 404`, () => {
         const thingId = 123456
         return supertest(app)
@@ -153,10 +161,12 @@ describe('Things Endpoints', function() {
   describe(`GET /api/things/:thing_id/reviews`, () => {
     context(`Given no things`, () => {
       beforeEach('seed users table', () => {
-        helpers.seedUsersTable(
-        db,
-        testUsers
-      )
+        helpers.seedThingsTables(
+          db,
+          testUsers,
+          testThings,
+          testReviews,
+        )
     })
       it(`responds with 404`, () => {
         const thingId = 123456
