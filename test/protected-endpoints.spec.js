@@ -1,5 +1,5 @@
 const knex = require('knex')
-const app = require('./app')
+const app = require('../src/app')
 const helpers = require('./test-helpers')
 const config = require('../src/config')
 
