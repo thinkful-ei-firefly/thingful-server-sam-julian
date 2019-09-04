@@ -5,7 +5,7 @@ function makeUsersArray() {
       user_name: 'test-user-1',
       full_name: 'Test user 1',
       nickname: 'TU1',
-      password: 'password',
+      password: '$2b$10$Mmg2E7F7Kgl2hFe/olopyuPIxuQuQ6eNkP3Tbp19HnDDh5jl7tOSO',
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
@@ -13,7 +13,7 @@ function makeUsersArray() {
       user_name: 'test-user-2',
       full_name: 'Test user 2',
       nickname: 'TU2',
-      password: 'password',
+      password: '$2b$10$Mmg2E7F7Kgl2hFe/olopyuPIxuQuQ6eNkP3Tbp19HnDDh5jl7tOSO',
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
@@ -21,7 +21,7 @@ function makeUsersArray() {
       user_name: 'test-user-3',
       full_name: 'Test user 3',
       nickname: 'TU3',
-      password: 'password',
+      password: '$2b$10$Mmg2E7F7Kgl2hFe/olopyuPIxuQuQ6eNkP3Tbp19HnDDh5jl7tOSO',
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
@@ -29,7 +29,7 @@ function makeUsersArray() {
       user_name: 'test-user-4',
       full_name: 'Test user 4',
       nickname: 'TU4',
-      password: 'password',
+      password: '$2b$10$Mmg2E7F7Kgl2hFe/olopyuPIxuQuQ6eNkP3Tbp19HnDDh5jl7tOSO',
       date_created: '2029-01-22T16:28:32.615Z',
     },
   ]
@@ -244,6 +244,12 @@ function seedThingsTables(db, users, things, reviews=[]) {
     )
 }
 
+function seedUsersTable(db, users) {
+  return db
+    .into('thingful_users')
+    .insert(users)
+}
+
 function seedMaliciousThing(db, user, thing) {
   return db
     .into('thingful_users')
@@ -257,7 +263,6 @@ function seedMaliciousThing(db, user, thing) {
 
 function makeAuthHeader() {
   const auth = Buffer.from('test-user-1:password').toString('base64')
-  console.log('the auth string is '+auth)
   return 'Basic '+auth
 }
 
@@ -273,4 +278,5 @@ module.exports = {
   cleanTables,
   seedThingsTables,
   seedMaliciousThing,
+  seedUsersTable
 }

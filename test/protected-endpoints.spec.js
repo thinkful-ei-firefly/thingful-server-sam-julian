@@ -39,11 +39,12 @@ before('make knex instance', () => {
         },
         {
             name: 'GET /api/things/:thing_id/reviews',
-            path: '/api/thing/1/reviews'
+            path: '/api/things/1/reviews'
         }
     ];
     protectedEndpoints.forEach(endpoint => {
         describe(endpoint.name, () => {
+            console.log(endpoint)
             it('responds with 401 missing token when no bearer token provided', () => {
                 return supertest(app)
                 .get(endpoint.path)
@@ -55,7 +56,7 @@ before('make knex instance', () => {
                 return supertest(app)
                 .get(endpoint.path)
                 .set('Authorization', helpers.makeAuthHeader())
-                .expect(401, { error: 'Unathorized request' });
+                .expect(401, {error: 'Unauthorized request'});
 
             });
         });

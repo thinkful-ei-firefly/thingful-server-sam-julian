@@ -49,7 +49,7 @@ describe('Things Endpoints', function() {
           helpers.makeExpectedThing(
             testUsers,
             thing,
-            testReviews,
+            testReviews
           )
         )
         return supertest(app)
@@ -59,7 +59,7 @@ describe('Things Endpoints', function() {
     })
 
     context(`Given an XSS attack thing`, () => {
-      const testUser = helpers.makeUsersArray()[1]
+      const testUser = helpers.makeUsersArray()[0]
       const {
         maliciousThing,
         expectedThing,
@@ -76,6 +76,7 @@ describe('Things Endpoints', function() {
       it('removes XSS attack content', () => {
         return supertest(app)
           .get(`/api/things`)
+          .set('Authorization', helpers.makeAuthHeader())
           .expect(200)
           .expect(res => {
             expect(res.body[0].title).to.eql(expectedThing.title)
@@ -151,6 +152,12 @@ describe('Things Endpoints', function() {
 
   describe(`GET /api/things/:thing_id/reviews`, () => {
     context(`Given no things`, () => {
+      beforeEach('seed users table', () => {
+        helpers.seedUsersTable(
+        db,
+        testUsers
+      )
+    })
       it(`responds with 404`, () => {
         const thingId = 123456
         return supertest(app)

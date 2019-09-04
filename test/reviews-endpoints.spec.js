@@ -45,7 +45,7 @@ describe('Reviews Endpoints', function() {
       }
       return supertest(app)
         .post('/api/reviews')
-        .set('Authorization', 'Basic ZHVuZGVyOnBhc3N3b3Jk')
+        .set('Authorization', helpers.makeAuthHeader())
         .send(newReview)
         .expect(201)
         .expect(res => {
@@ -77,7 +77,7 @@ describe('Reviews Endpoints', function() {
         )
     })
 
-    const requiredFields = ['text', 'rating', 'user_id', 'thing_id']
+    const requiredFields = ['text', 'rating', 'thing_id']
 
     requiredFields.forEach(field => {
       const testThing = testThings[0]
