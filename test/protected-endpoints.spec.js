@@ -47,17 +47,14 @@ before('make knex instance', () => {
             it('responds with 401 missing token when no bearer token provided', () => {
                 return supertest(app)
                 .get(endpoint.path)
-                .expected(401, { error: 'Missing bearer token'});
+                .expect(401, { error: 'Missing basic token'});
             });
             it('responds with 401 "Unathorized request" when invalid', () => {
-                const testUsers= testUsers[0];
+                // testUsers= testUsers[0];
 
                 return supertest(app)
                 .get(endpoint.path)
-                .set(
-                    'Authorization',
-                    helpers.makeAuthHeader
-                )
+                .set('Authorization', helpers.makeAuthHeader())
                 .expect(401, { error: 'Unathorized request' });
 
             });

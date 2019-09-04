@@ -15,7 +15,7 @@ function requireAuth(req, res, next) {
     .split(':')
 
   if (!token_username || !token_password) {
-    return res.status(401).json({error: 'Unauthorized request (no username/password)'})
+    return res.status(401).json({error: 'Unauthorized request'})
   }
 
   req.app.get('db')('thingful_users')
@@ -23,7 +23,7 @@ function requireAuth(req, res, next) {
     .first()
     .then(user => {
       if (!user) {
-        return res.status(401).json({error: 'Unauthorized request(no user match or wrong password)'})
+        return res.status(401).json({error: 'Unauthorized request'})
       }
       return bcrypt.compare(token_password, user.password)
         .then(match => {
