@@ -61,5 +61,7 @@ before('make knex instance', () => {
                 .expect(401, { error: 'Unathorized request' });
 
             });
-    });
-});
+        });
+    })
+  })
+})
